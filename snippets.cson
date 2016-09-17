@@ -1,0 +1,167 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# https://atom.io/docs/latest/using-atom-basic-customization#cson
+
+'.source.js':
+  'add elm plugin for brunch':
+    'prefix': 'secbrelm'
+    'body': """
+
+        elmBrunch: {
+          elmFolder: "web/elm",
+          mainModules: ["App.elm"],
+          outputFolder: "../static/vendor"
+        \\},
+    """
+
+  'add elm to wathcing directory':
+    'prefix': 'secbrwelm'
+    'body': '"web/elm",'
+
+  'attach.ElmApp.to.container':
+    'prefix': 'secattcnt'
+    'body': """
+    // Set up Elm App
+    const elmDiv = document.querySelector("#elm-container");
+    const elmApp = Elm.SecounterApp.embed(elmDiv);
+    """
+
+'.text.elixir':
+  'create container for SEC application':
+    'prefix': 'secappcnt'
+    'body': '<div id="elm-container"></div>'
+
+  'replace app.html.eex fie content':
+    'prefix': 'secapphtml'
+    'body': """
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Hello SECounter!</title>
+        <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+        <style>
+        .header {
+          background-color: black;
+        }
+        .logo {
+          margin: 2em;
+          vertical-align: middle;
+          background-image: url("https://github.com/webdizz/fun-web-dev/blob/master/epam-sec-fall-2016.png?raw=true");
+        }
+        </style>
+      </head>
+
+      <body>
+        <div class="container">
+          <header class="header" >
+            <span class="logo"></span>
+          </header>
+
+          <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+          <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+          <main role="main">
+            <%= render @view_module, @view_template, assigns %>
+          </main>
+
+        </div> <!-- /container -->
+        <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+      </body>
+    </html>
+
+    """
+
+'.source.elm':
+  'import all required packages':
+    'prefix': 'secelmapp'
+    'body': """
+    module SecounterApp exposing (..)
+
+    import Html exposing (..)
+    import Html.App as App
+    import Html.Attributes exposing (..)
+    import Html.Events exposing (..)
+    import WebSocket
+    import Json.Encode as Encode
+    import Json.Decode exposing (..)
+    import String
+
+
+    main =
+        App.beginnerProgram { model = 0, view = view, update = update }
+
+
+
+    -- TYPES
+
+
+    type MsgType
+        = Increment
+        | Decrement
+
+
+
+    -- UPDATE
+
+
+    update : MsgType -> number -> number
+    update msg model =
+        case msg of
+            Increment ->
+                model + 1
+
+            Decrement ->
+                model - 1
+
+
+
+    -- VIEW
+
+
+    view : a -> Html MsgType
+    view model =
+        div [ style [ ( "margin", "10px" ) ] ]
+            [ button [ onClick Decrement ] [ text "-" ]
+            , strong [ style [ ( "margin", "10px" ) ] ] [ text (toString model) ]
+            , button [ onClick Increment ] [ text "+" ]
+            , div [ style [ ( "font-weight", "bold" ), ( "padding-top", "10px" ) ] ] [ text "Debug:" ]
+            ]
+
+    """
+  'define Phoenix websocket connection URL':
+    'prefix': 'secelmsocket'
+    'body': """
+    sockerUrl : String
+    sockerUrl =
+        "ws://localhost:4000/socket/websocket"
+    """
+
+
+'.source.elixir':
+  'register channel handler':
+    'prefix': 'secexregcn'
+    'body': 'channel "counter:*", Secounter.CounterChannel'
