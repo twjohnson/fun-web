@@ -232,7 +232,7 @@ update msg { counter, message } =
             , sendChannelMsg (prepareChannelMsg "decrement" counter)
             )
     ```
-	Snippet: ****	
+	Snippet: **secelmappupjn**	
 	
 23. Now let's define our model to handle application state
 
@@ -242,7 +242,7 @@ update msg { counter, message } =
 	    , message : String
     	}
 	```
-	Snippet: ****		
+	Snippet: **secelmappmodel**
 
 24. Now let's redefine main function
 
@@ -255,9 +255,9 @@ update msg { counter, message } =
         , subscriptions = subscriptions
         }
 	```
-	Snippet: ****			
+	Snippet: **secelmappupmn**
 
-25. Now let's define init function and subscription, during init we're going to join *Phoenix* channel and subscriptions will receive messages from channel
+25. Now let's define init function and subscriptions, during init we're going to join *Phoenix* channel and subscriptions will receive messages from channel
 
 	```
 	init : MsgType -> ( Model, Cmd MsgType )
@@ -268,7 +268,7 @@ update msg { counter, message } =
 	subscriptions model =
     	WebSocket.listen sockerUrl Receive
 	```
-	Snippet: ****			
+	Snippet: **secelmappintsub**
 	
 26. Now let's add new MsgType to handle messages from channel by updating our application UI
 
@@ -279,7 +279,7 @@ update msg { counter, message } =
     	| Join
 	    | Receive String
     ```
-	Snippet: ****		
+	Snippet: **secelmappaddrcv**
 
 27. Now we need to align out update function by adding code to handle Receive MsgType. Now after refresh we can see a response from *Phoenix* on successful established connection to channel
 
@@ -291,7 +291,7 @@ update msg { counter, message } =
 
                 Ok value ->
                     ( Model (Result.withDefault counter (String.toInt value.payload)) msgFromChannel, Cmd.none )    	```
-	Snippet: ****		
+	Snippet: **secelmappaddrcvhdnl**
 
 28. Now let's fix our view function to interpret changes happened to model. After that UI looks ok, however we did not alignn our changes at backend to handle increment/decrement
 
@@ -306,9 +306,9 @@ update msg { counter, message } =
 	        , div [] [ text model.message ]
         	]
     ```
-	Snippet: ****		
+	Snippet: **secelmappupview**
 
-29. Now let's add some *Elixir* code
+29. Now let's add some *Elixir* code to handle incoming messages over channels
 
 	```
 	  def handle_in("increment", payload, socket) do
@@ -321,5 +321,5 @@ update msg { counter, message } =
 	    {:noreply, socket}
 	  end
     ```
-	Snippet: ****		
+	Snippet: **secexaddhndlrs**
 	
