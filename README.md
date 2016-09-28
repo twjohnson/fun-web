@@ -2,27 +2,39 @@
 
 1. Install *Phoenix* tasks for *Mix*
 
-	```mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez```
+	```
+	mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez
+	```
 
 2. Create new *Phoenix* application
 
-	```mix phoenix.new secounter --no-ecto```
+	```
+	mix phoenix.new secounter --no-ecto
+	```
 
 3. Change directory to newly created project
 
-	```cd secounter```
+	```
+	cd secounter
+	```
 
 4. Start *Phoenix* application and open browser at **http://localhost:4000**
 
-	``` mix phoenix.server```
+	```
+	mix phoenix.server
+	```
 
 5. Create directory for *Elm* source code
 
-	```mkdir web/elm```
+	```
+	mkdir web/elm
+	```
 
 6. Install **elm-brunch** as a development dependency
 
-	```npm install --save-dev elm-brunch```
+	```
+	npm install --save-dev elm-brunch
+	```
 
 7. Install *Elm* package to support *WebSocket*
 
@@ -55,7 +67,10 @@
 
 10. Swap content of **web/templates/page/index.html.eex** to be able to include *Elm* application inside container
 
-	```<div id="elm-container"></div>```
+	```
+	<div id="elm-container"></div>
+	```
+
 	Snippet: **secappcnt**
 
 11. Swap content of **web/templates/layout/app.html.eex** to change look and feel of application
@@ -67,7 +82,9 @@
 	```
 	mix phoenix.gen.channel Counter
 	```
+
 13. Register created channel in **secounter/web/channels/user_socket.ex** file
+
 	```
 	channel "counter:*", Secounter.CounterChannel
 	```
@@ -117,7 +134,6 @@
         ]
 
 	```
-
 	Snippet: **secelmapp**
 
 15. Attach application to be able to view it in file **secounter/web/static/js/app.js**
@@ -272,10 +288,10 @@ update msg { counter, message } =
 
                 Ok value ->
                     ( Model (Result.withDefault counter (String.toInt value.payload)) msgFromChannel, Cmd.none )    	
-		```
+	 ```
 	Snippet: **secelmappaddrcvhdnl**
 
-25. Now let's fix our view function to interpret changes happened to model. After that UI looks ok, however we did not alignn our changes at backend to handle increment/decrement
+25. Now let's fix our view function to interpret changes happened to model. After that UI looks ok, however we did not align our changes at backend to handle increment/decrement
 
 	```
 	view : Model -> Html MsgType
