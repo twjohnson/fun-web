@@ -23,27 +23,29 @@
 	```
 	mix phoenix.server
 	```
+5. Swap content of **web/templates/layout/app.html.eex** to change look and feel of application
 
-5. Create directory for *Elm* source code
+	Snippet: **secapphtml**
+
+6. Create directory for *Elm* source code
 
 	```
 	mkdir web/elm
 	```
 
-6. Install **elm-brunch** as a development dependency
+7. Install **elm-brunch** as a development dependency
 
 	```
 	npm install --save-dev elm-brunch
 	```
 
-7. Install *Elm* package to support *WebSocket*
+8. Install *Elm* package to support *WebSocket*
 
 	```
 	cd web/elm
 	elm package install elm-lang/websocket
 	```
-
-8. Add watching of **web/elm** directory in **brunch-config.js** in section **watched**.
+9. Add watching of **web/elm** directory in **brunch-config.js** in section **watched**.
 
 	```
 	watched: [
@@ -54,7 +56,7 @@
 	```
 	Snippet: **secbrwelm**
 
-9. Add **elmBrunch** plugin in **brunch-config.js** in section **plugins**
+10. Add **elmBrunch** plugin in **brunch-config.js** in section **plugins**
 
 	```
 	elmBrunch: {
@@ -65,32 +67,24 @@
 	```
 	Snippet: **secbrelm**
 
-10. Swap content of **web/templates/page/index.html.eex** to be able to include *Elm* application inside container
+11. Swap content of **web/templates/page/index.html.eex** to be able to include *Elm* application inside container
 
 	```
 	<div id="elm-container"></div>
 	```
-
 	Snippet: **secappcnt**
 
-11. Swap content of **web/templates/layout/app.html.eex** to change look and feel of application
+12. Attach application to be able to view it in file **secounter/web/static/js/app.js**
 
-	Snippet: **secapphtml**
+		```
+		// Set up Elm App
+		const elmDiv = document.querySelector("#elm-container");
+		const elmApp = Elm.SecounterApp.embed(elmDiv);
 
-12. Let's create *Phoenix* channel handler
+		```
+		Snippet: **secattcnt**
 
-	```
-	mix phoenix.gen.channel Counter
-	```
-
-13. Register created channel in **secounter/web/channels/user_socket.ex** file
-
-	```
-	channel "counter:*", Secounter.CounterChannel
-	```
-	Snippet: **secexregcn**
-
-14. Create file **secounter/web/elm/App.elm** with next initial content
+13. Create file **secounter/web/elm/App.elm** with next initial content
 
 	```
 	module SecounterApp exposing (..)
@@ -136,15 +130,18 @@
 	```
 	Snippet: **secelmapp**
 
-15. Attach application to be able to view it in file **secounter/web/static/js/app.js**
+14. Let's create *Phoenix* channel handler
 
 	```
-	// Set up Elm App
-	const elmDiv = document.querySelector("#elm-container");
-	const elmApp = Elm.SecounterApp.embed(elmDiv);
+	mix phoenix.gen.channel Counter
+	```
+
+15. Register created channel in **secounter/web/channels/user_socket.ex** file
 
 	```
-	Snippet: **secattcnt**
+	channel "counter:*", Secounter.CounterChannel
+	```
+	Snippet: **secexregcn**
 
 16. Let's write some code to allow increment/decrement functionality over *Phoenix* channels starting from channel message type
 
