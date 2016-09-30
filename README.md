@@ -288,22 +288,7 @@ update msg { counter, message } =
 	 ```
 	Snippet: **secelmappaddrcvhdnl**
 
-25. Now let's fix our view function to interpret changes happened to model. After that UI looks ok, however we did not align our changes at backend to handle increment/decrement
-
-	```
-	view : Model -> Html MsgType
-	view model =
-    	div [ style [ ( "padding", "10px" ) ] ]
-        	[ button [ onClick Decrement ] [ text "-" ]
-	        , strong [ style [ ( "padding", "10px" ) ] ] [ text (toString model.counter) ]
-    	    , button [ onClick Increment ] [ text "+" ]
-        	, div [ style [ ( "font-weight", "bold" ), ( "padding", "10px" ) ] ] [ text "Debug:" ]
-	        , div [] [ text model.message ]
-        	]
-    ```
-	Snippet: **secelmappupview**
-
-26. Now let's add some *Elixir* code to handle incoming messages over channels
+25. Now let's add some *Elixir* code to handle incoming messages over channels in *secounter/web/channels/counter_channel.ex*
 
 	```
 	  def handle_in("increment", payload, socket) do
@@ -317,3 +302,18 @@ update msg { counter, message } =
 	  end
     ```
 	Snippet: **secexaddhndlrs**
+
+26. Now let's fix our view function to interpret changes happened to model. After that UI looks ok, however we did not align our changes at backend to handle increment/decrement
+
+	```
+	view : Model -> Html MsgType
+	view model =
+    	div [ style [ ( "padding", "10px" ) ] ]
+        	[ button [ onClick Decrement ] [ text "-" ]
+	        , strong [ style [ ( "padding", "10px" ) ] ] [ text (toString model.counter) ]
+    	    , button [ onClick Increment ] [ text "+" ]
+        	, div [ style [ ( "font-weight", "bold" ), ( "padding", "10px" ) ] ] [ text "Debug:" ]
+	        , div [] [ text model.message ]
+        	]
+    ```
+	Snippet: **secelmappupview**

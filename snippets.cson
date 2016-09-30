@@ -303,4 +303,9 @@
       broadcast! socket, "decrement", %{"body" => "\#{impose_payload(payload) - 1}"}
       {:noreply, socket}
     end
+
+    defp impose_payload(payload) do
+      String.to_integer(payload["body"])
+    end
+
     """
