@@ -130,20 +130,7 @@
 	```
 	Snippet: **secelmapp**
 
-14. Let's create *Phoenix* channel handler
-
-	```
-	mix phoenix.gen.channel Counter
-	```
-
-15. Register created channel in **secounter/web/channels/user_socket.ex** file
-
-	```
-	channel "counter:*", Secounter.CounterChannel
-	```
-	Snippet: **secexregcn**
-
-16. Let's write some code to allow increment/decrement functionality over *Phoenix* channels starting from channel message type
+14. Let's write some code to allow increment/decrement functionality over *Phoenix* channels starting from channel message type
 
 	```
 	type alias ChannelMsg =
@@ -156,7 +143,7 @@
 	```
 	Snippet: **secelmappcnmsg**
 
-17. Now let's add some utility code to handle message conversion and sending to channel
+15. Now let's add some utility code to handle message conversion and sending to channel
 
 	```
 	sendChannelMsg : ChannelMsg -> Cmd a
@@ -195,6 +182,18 @@
 	```
 	Snippet: **secelmapputils**
 
+16. Let's create *Phoenix* channel handler
+
+	```
+	mix phoenix.gen.channel Counter
+	```
+17. Register created channel in **secounter/web/channels/user_socket.ex** file
+
+	```
+	channel "counter:*", Secounter.CounterChannel
+	```
+	Snippet: **secexregcn**
+
 18. Now let's join *Phoenix* channel from *Elm*
 
 	```
@@ -203,7 +202,7 @@
     	| Decrement
     	| Join
 	```
-	Snippet: **secelmappcnmsg**
+	Snippet: **secelmappjntp**
 
 19. Now let's fix compilation error related to add new MsgType Join by redefining update function
 
