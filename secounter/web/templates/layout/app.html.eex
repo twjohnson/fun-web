@@ -7,18 +7,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Secounter!</title>
+    <title>Hello SECounter!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <style>
+    .header {
+      background-color: black;
+    }
+    .logo {
+      margin: 2em;
+      vertical-align: middle;
+      background-image: url("https://github.com/webdizz/fun-web-dev/blob/master/epam-sec-fall-2016.png?raw=true");
+    }
+    </style>
   </head>
 
   <body>
     <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
+      <header class="header" >
         <span class="logo"></span>
       </header>
 
